@@ -1,24 +1,131 @@
 <ion-content padding>
+  <h1 text-center>
+    <ion-icon
+      name="planet"
+      color="primary"
+      class="icon-7em"
+    ></ion-icon>
+  </h1>
 
-    <h1 text-center>
-      <ion-icon name="planet" color="primary" class="icon-7em"></ion-icon>
-    </h1>
+  <form
+    [formGroup]="authForm"
+    (submit)="onSubmit()"
+  >
+
+    <ng-container *ngIf="!configs.isSignIn">
+      <ion-item>
+        <ion-icon
+          name="person"
+          color="primary"
+          slot="start"
+        ></ion-icon>
+        <ion-input
+          type="text"
+          placeholder="Name"
+          formControlName="name"
+          clearInput
+        ></ion-input>
+        <ion-note
+          slot="end"
+          color="danger"
+          *ngIf="name.dirty && name.hasError('required')"
+        >
+          Requerido
+        </ion-note>
+        <ion-note
+          slot="end"
+          color="danger"
+          *ngIf="name.dirty && name.hasError('minlength')"
+        >
+          Min 3 Caracteres
+        </ion-note>
+      </ion-item>
+    </ng-container>
 
     <ion-item>
-      <ion-icon name="mail" color="primary" slot="start"></ion-icon>
-      <ion-input type="email" placeholder="Email" inputmode="email" autofocus="true"></ion-input>
+      <ion-icon
+        name="mail"
+        color="primary"
+        slot="start"
+      ></ion-icon>
+      <ion-input
+        type="email"
+        placeholder="Email"
+        formControlName="email"
+        inputmode="email"
+        autofocus="true"
+        clearInput
+      ></ion-input>
+      <ion-note
+        slot="end"
+        color="danger"
+        *ngIf="email.dirty && email.hasError('required')"
+      >
+        Requerido
+      </ion-note>
+      <ion-note
+        slot="end"
+        color="danger"
+        *ngIf="email.dirty && email.hasError('email')"
+      >
+        Email Inválido
+      </ion-note>
     </ion-item>
 
     <ion-item>
-      <ion-icon name="lock" color="primary" slot="start"></ion-icon>
-      <ion-input type="password" placeholder="Password"></ion-input>
+      <ion-icon
+        name="lock"
+        color="primary"
+        slot="start"
+      ></ion-icon>
+      <ion-input
+        type="password"
+        placeholder="Password"
+        formControlName="password"
+        clearInput
+      ></ion-input>
+      <ion-note
+        slot="end"
+        color="danger"
+        *ngIf="password.dirty && password.hasError('required')"
+      >
+        Requerido
+      </ion-note>
+      <ion-note
+        slot="end"
+        color="danger"
+        *ngIf="password.dirty && password.hasError('minlength')"
+      >
+        Min 6 Caracteres
+      </ion-note>
     </ion-item>
-
-    <ion-button expand="block">Login</ion-button>
-    <ion-button expand="block" fill="clear">Criar uma Conta</ion-button>
-    <ion-button expand="block">
-      <ion-icon name="logo-facebook" slot="start"></ion-icon>
-      Login com Facebook
+    <ion-button
+      expand="block"
+      type="submit"
+      [disabled]="authForm.invalid"
+    >
+      {{ configs.action }}
     </ion-button>
+  </form>
+
+  <ion-button
+    expand="block"
+    fill="clear"
+    (click)="changeAuthAction()"
+  >
+    {{ configs.actionChange }}
+  </ion-button>
+  <ion-button expand="block">
+    <ion-icon
+      name="logo-facebook"
+      slot="start"
+    ></ion-icon>
+    Login com Facebook
+  </ion-button>
 
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>2019 EduardoMoritz®</ion-title>
+  </ion-toolbar>
+</ion-footer>
