@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
-import { AuthService } from 'src/app/core/service/auth.service';
-import { AuthProvider } from 'src/app/core/service/auth.types';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { AuthProvider } from 'src/app/core/services/auth.types';
 
 @Component({
   selector: 'app-login',
@@ -32,13 +32,13 @@ export class LoginPage implements OnInit {
   }
 
   get name(): FormControl {
-    return <FormControl>this.authForm.get('name');
+    return this.authForm.get('name') as FormControl;
   }
   get email(): FormControl {
-    return <FormControl>this.authForm.get('email');
+    return this.authForm.get('email') as FormControl;
   }
   get password(): FormControl {
-    return <FormControl>this.authForm.get('password');
+    return this.authForm.get('password') as FormControl;
   }
 
   changeAuthAction(): void {
