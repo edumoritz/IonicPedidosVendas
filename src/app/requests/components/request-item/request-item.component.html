@@ -1,3 +1,21 @@
-<p>
-  request-item works!
-</p>
+<ion-item-sliding #sliding>
+  <!-- Colocar evento de click para abrir nova pagina mostrando informações do Pedido -->
+  <ion-item>{{ request.title }}</ion-item>
+  <ion-item-options side="start">
+    <ion-item-option
+      color="danger"
+      (click)="delete.emit(request); sliding.close()"
+    >
+      <ion-icon
+        slot="icon-only"
+        name="trash"
+      ></ion-icon>
+    </ion-item-option>
+    <ion-item-option (click)="update.emit(request); sliding.close()">
+      <ion-icon
+        slot="icon-only"
+        name="create"
+      ></ion-icon>
+    </ion-item-option>
+  </ion-item-options>
+</ion-item-sliding>

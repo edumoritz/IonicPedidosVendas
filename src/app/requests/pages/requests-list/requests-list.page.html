@@ -6,8 +6,10 @@
 
 <ion-content>
   <ion-list>
-    <ion-item>Camiseta Preta</ion-item>
-    <ion-item>Camiseta Branca</ion-item>
+    <app-request-item
+      *ngFor="let request of (requests$ | async)"
+      [request]="request"
+    ></app-request-item>
   </ion-list>
 
   <ion-fab
