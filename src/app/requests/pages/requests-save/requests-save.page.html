@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/requests"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Criar Pedido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form
+    [formGroup]="requestForm"
+    (submit)="onSubmit()"
+  >
+    <ion-item>
+      <ion-icon
+        name="paper"
+        slot="start"
+        color="primary"
+      ></ion-icon>
+      <ion-input
+        type="text"
+        placeholder="Titulo"
+        autofocus="true"
+        inputmode="text"
+        formControlName="title"
+      >
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon
+        name="paper"
+        slot="start"
+        color="primary"
+      ></ion-icon>
+      <ion-input
+        type="text"
+        placeholder="Descrição"
+        autofocus="true"
+        inputmode="text"
+        formControlName="description"
+      >
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon
+        name="cart"
+        slot="start"
+        color="primary"
+      ></ion-icon>
+      <ion-input
+        type="number"
+        placeholder="Quantidade"
+        autofocus="true"
+        inputmode="number"
+        formControlName="amount"
+      >
+      </ion-input>
+    </ion-item>
+
+    <ion-button
+      expand="full"
+      type="submit"
+      [disabled]="requestForm.invalid"
+    >
+      Salvar
+    </ion-button>
+  </form>
+</ion-content>

@@ -8,6 +8,10 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     children: [
       {
+        path: 'create',
+        loadChildren: './pages/requests-save/requests-save.module#RequestsSavePageModule'
+      },
+      {
         path: '',
         loadChildren: './pages/requests-list/requests-list.module#RequestsListPageModule'
       }
