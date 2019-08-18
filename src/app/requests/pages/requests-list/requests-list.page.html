@@ -4,19 +4,17 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <app-request-item
-      *ngFor="let request of (requests$ | async)"
-      [request]="request"
-    ></app-request-item>
+<ion-content padding>
+  <ion-list *ngIf="requests$ | async as requests">
+    <ng-container *ngIf="requests.length > 0; else noRequests">
+      <app-request-item *ngFor="let request of requests" [request]="request"></app-request-item>
+    </ng-container>
+    <ng-template #noRequests>
+      <ion-item lines="none">Nenhum Pedido Cadastrado...</ion-item>
+    </ng-template>
   </ion-list>
 
-  <ion-fab
-    vertical="bottom"
-    horizontal="end"
-    slot="fixed"
-  >
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>

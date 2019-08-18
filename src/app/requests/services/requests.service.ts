@@ -18,8 +18,10 @@ export class RequestsService extends Firestore<Request> {
   private init(): void {
     this.authService.authState$.subscribe(user => {
       if (user) {
-        this.setCollection(`/users/${user.uid}/tasks`);
+        this.setCollection(`/users/${user.uid}/requests`);
+        return;
       }
+      this.setCollection(null);
     });
   }
 }

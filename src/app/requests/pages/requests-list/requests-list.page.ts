@@ -1,21 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Request } from '../../models/request.model';
+import { RequestsService } from '../../services/requests.service';
 
 @Component({
   selector: 'app-requests-list',
   templateUrl: './requests-list.page.html',
   styleUrls: ['./requests-list.page.scss']
 })
-export class RequestsListPage implements OnInit {
+export class RequestsListPage {
   requests$: Observable<Request[]>;
 
-  constructor() {}
+  constructor(private requestsService: RequestsService) {}
 
-  ngOnInit(): void {
-    this.requests$ = of([
-      { id: 'fdssvsdvds', title: 'Camiseta Preta', description: '', amount: 5 },
-      { id: 'fdssvsdvds', title: 'Camiseta Branca', description: '', amount: 3 }
-    ]);
+  ionViewDidEnter(): void {
+    this.requests$ = this.requestsService.getAll();
   }
 }
