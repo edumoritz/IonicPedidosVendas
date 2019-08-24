@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { Observable, of } from 'rxjs';
+
 import { Request } from '../../models/request.model';
 import { RequestsService } from '../../services/requests.service';
 
@@ -11,9 +13,13 @@ import { RequestsService } from '../../services/requests.service';
 export class RequestsListPage {
   requests$: Observable<Request[]>;
 
-  constructor(private requestsService: RequestsService) {}
+  constructor(private navCtrl: NavController, private requestsService: RequestsService) {}
 
   ionViewDidEnter(): void {
     this.requests$ = this.requestsService.getAll();
+  }
+
+  onUpdate(request: Request): void {
+    this.navCtrl.navigateForward(['requests', 'edit', request.id]);
   }
 }

@@ -12,6 +12,10 @@ const routes: Routes = [
         loadChildren: './pages/requests-save/requests-save.module#RequestsSavePageModule'
       },
       {
+        path: 'edit/:id',
+        loadChildren: './pages/requests-save/requests-save.module#RequestsSavePageModule'
+      },
+      {
         path: '',
         loadChildren: './pages/requests-list/requests-list.module#RequestsListPageModule'
       }
