@@ -1,9 +1,11 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 
 import { RequestsService } from '../../services/requests.service';
 import { OverlayService } from 'src/app/core/services/overlay.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-requests-save',
@@ -12,16 +14,38 @@ import { OverlayService } from 'src/app/core/services/overlay.service';
 })
 export class RequestsSavePage implements OnInit {
   requestForm: FormGroup;
+  pageTitle = '...';
+  requestId: string = undefined;
 
   constructor(
     private fb: FormBuilder,
     private navCtrl: NavController,
     private overlayService: OverlayService,
+    private route: ActivatedRoute,
     private requestsService: RequestsService
   ) {}
 
   ngOnInit(): void {
     this.createForm();
+    this.init();
+  }
+
+  init(): void {
+    const requestId = this.route.snapshot.paramMap.get('id');
+    if (!requestId) {
+      this.pageTitle = 'Criar Pedido';
+      return;
+    }
+    this.requestId = requestId;
+    this.pageTitle = 'Editar Pedido';
+    this.requestsService
+      .get(requestId)
+      .pipe(take(1))
+      .subscribe(({ title, description, amount }) => {
+        this.requestForm.get('title').setValue(title);
+        this.requestForm.get('description').setValue(description);
+        this.requestForm.get('amount').setValue(amount);
+      });
   }
 
   private createForm(): void {
