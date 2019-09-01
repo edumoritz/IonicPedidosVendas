@@ -22,4 +22,8 @@ export class RequestsListPage {
   onUpdate(request: Request): void {
     this.navCtrl.navigateForward(['requests', 'edit', request.id]);
   }
+
+  onDetail(request: Request): void {
+    this.navCtrl.navigateForward(['requests', 'detail', request.id]);
+  }
 }

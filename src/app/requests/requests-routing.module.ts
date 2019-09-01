@@ -16,6 +16,10 @@ const routes: Routes = [
         loadChildren: './pages/requests-save/requests-save.module#RequestsSavePageModule'
       },
       {
+        path: 'detail/:id',
+        loadChildren: './pages/request-detail/request-detail.module#RequestDetailPageModule'
+      },
+      {
         path: '',
         loadChildren: './pages/requests-list/requests-list.module#RequestsListPageModule'
       }

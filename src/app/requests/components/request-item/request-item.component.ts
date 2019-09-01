@@ -11,5 +11,6 @@ export class RequestItemComponent {
   @Input() request: Request;
   @Output() done = new EventEmitter<Request>();
   @Output() update = new EventEmitter<Request>();
+  @Output() detail = new EventEmitter<Request>();
   @Output() delete = new EventEmitter<Request>();
 }
