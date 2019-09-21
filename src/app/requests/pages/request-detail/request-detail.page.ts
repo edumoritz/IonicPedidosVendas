@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { FormGroup } from '@angular/forms';
+import { take } from 'rxjs/operators';
 
-import { Request } from '../../models/request.model';
 import { RequestsService } from '../../services/requests.service';
 
 @Component({
@@ -10,20 +11,36 @@ import { RequestsService } from '../../services/requests.service';
   styleUrls: ['./request-detail.page.scss']
 })
 export class RequestDetailPage {
-  requests$: Observable<Request[]>;
+  requestForm: FormGroup;
+  titulo = '';
+  desc = '';
+  qtd = 0;
   count = 0;
 
-  constructor(private requestsService: RequestsService) {}
+  constructor(private requestsService: RequestsService, private route: ActivatedRoute) {}
 
   ionViewDidEnter(): void {
-    this.requests$ = this.requestsService.getAll();
+    const requestId = this.route.snapshot.paramMap.get('id');
+    console.log(requestId);
+    this.requestsService
+      .get(requestId)
+      .pipe(take(1))
+      .subscribe(({ title, description, amount }) => {
+        this.titulo = title;
+        this.desc = description;
+        this.qtd = amount;
+      });
   }
 
-  onAmount(tipo: number): void {
+  onAmount(tipo: number, index: string): number {
     if (tipo === 0 && this.count !== 0) {
-      this.count = this.count - 1;
+      this.count--;
     } else if (tipo === 1) {
-      this.count = this.count + 1;
+      this.count++;
     }
+
+    return this.count;
   }
+
+  onBuy(value: number): void {}
 }
