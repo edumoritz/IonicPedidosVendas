@@ -61,8 +61,12 @@ export class RequestsSavePage implements OnInit {
       message: 'Saving...'
     });
     try {
-      const request = await this.requestsService.create(this.requestForm.value);
-      console.log('Request created! ', request);
+      const request = !this.requestId
+        ? await this.requestsService.create(this.requestForm.value)
+        : await this.requestsService.update({
+            id: this.requestId,
+            ...this.requestForm.value
+          });
       this.navCtrl.navigateBack('/requests');
     } catch (error) {
       console.log('Error saving Request: ', error);
