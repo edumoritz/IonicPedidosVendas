@@ -48,6 +48,12 @@ export class RequestDetailPage {
   }
 
   async onSubmit(): Promise<void> {
+    if (this.count === 0) {
+      await this.overlayService.toast({
+        message: 'Nenhuma quantidade adicionada!'
+      });
+      return;
+    }
     const result = this.qtd - this.count;
     const loading = await this.overlayService.loading({
       message: 'Saving...'

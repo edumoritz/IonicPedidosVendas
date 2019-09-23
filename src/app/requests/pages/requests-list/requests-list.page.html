@@ -1,5 +1,9 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <!-- Botão que levará a uma lista de pessoas e seus pedidos -->
+    <ion-button slot="end">
+      <ion-icon name="list-box"></ion-icon>
+    </ion-button>
     <ion-title>Lista de Pedidos</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -20,8 +24,15 @@
     </ng-template>
   </ion-list>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button routerLink="/requests/create" routerDirection="forward">
+  <ion-fab
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+  >
+    <ion-fab-button
+      routerLink="/requests/create"
+      routerDirection="forward"
+    >
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
