@@ -18,7 +18,9 @@ export class RequestsService extends Firestore<Request> {
   private init(): void {
     this.authService.authState$.subscribe(user => {
       if (user) {
-        this.setCollection(`/users/${user.uid}/requests`);
+        this.setCollection(`/users/${user.uid}/requests`, ref =>
+          ref.orderBy('amount', 'desc').orderBy('title', 'asc')
+        );
         return;
       }
       this.setCollection(null);

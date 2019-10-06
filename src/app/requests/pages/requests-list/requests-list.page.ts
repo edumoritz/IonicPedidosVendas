@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { Request } from '../../models/request.model';
 import { RequestsService } from '../../services/requests.service';
@@ -20,8 +21,10 @@ export class RequestsListPage {
     private requestsService: RequestsService
   ) {}
 
-  ionViewDidEnter(): void {
+  async ionViewDidEnter(): Promise<void> {
+    const loading = await this.overlayService.loading();
     this.requests$ = this.requestsService.getAll();
+    this.requests$.pipe(take(1)).subscribe(requests => loading.dismiss());
   }
 
   onUpdate(request: Request): void {
